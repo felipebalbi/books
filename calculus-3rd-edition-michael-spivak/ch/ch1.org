@@ -1,8 +1,10 @@
 * Basic Properties of Numbers
 
-** Prove the following
+** Exercise 1
 
-   - If $ax = a$ for some number $a \neq 0$, then $x = 1$
+   Prove the following
+
+   1. If $ax = a$ for some number $a \neq 0$, then $x = 1$
 
      - *Solution*
 
@@ -15,7 +17,7 @@
          x &= 1
        \end{align*}
 
-   - $x^2 - y^2 = (x - y)(x + y)$
+   2. $x^2 - y^2 = (x - y)(x + y)$
 
      - *Solution*
 
@@ -28,7 +30,7 @@
         &= x^2 - y^2
        \end{align*}
 
-   - If $x^2 = y^2$, then $x = y$ or $x = -y$
+   3. If $x^2 = y^2$, then $x = y$ or $x = -y$
 
      - *Solution*
 
@@ -57,7 +59,7 @@
          x &= y && \text{Additive Inverse}
        \end{align*}
 
-   - $x^3 - y^3 = (x - y)(x^2 + xy + y^2)$
+   4. $x^3 - y^3 = (x - y)(x^2 + xy + y^2)$
 
      - *Solution*
 
@@ -69,7 +71,7 @@
          &= x^3 - y^3
        \end{align*}
 
-   - $x^n - y^n = (x - y)(x^{n-1} + x^{n-2}y + \ldots + xy^{n-2} + y^{n-1}$
+   5. $x^n - y^n = (x - y)(x^{n-1} + x^{n-2}y + \ldots + xy^{n-2} + y^{n-1}$
 
      - *Solution*
 
@@ -89,7 +91,9 @@
 	 &= x^n -y^n \\
        \end{align*}
 
-** What is wrong with the following "proof"? Let $x = y$. Then
+** Exercise 2
+
+   What is wrong with the following "proof"? Let $x = y$. Then
 
    \begin{align*}
      x^2 &= xy \\
@@ -104,9 +108,11 @@
 
      Division by $x - y = 0$.
 
-** Prove the following
+** Exercise 3
 
-   - $\frac{a}{b} = \frac{ac}{bc}$ if $b, c \neq 0$
+   Prove the following
+
+   1. $\frac{a}{b} = \frac{ac}{bc}$ if $b, c \neq 0$
 
      - *Solution*
 
@@ -119,7 +125,7 @@
 	 &= \frac{a}{b}
        \end{align*}
 
-   - $\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}$, if $b, d \neq 0$
+   2. $\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}$, if $b, d \neq 0$
 
      - *Solution*
 
@@ -134,7 +140,7 @@
 	 &= \frac{a}{b} + \frac{c}{d}
        \end{align*}
 
-   - $\frac{a}{b} \div \frac{c}{d} = \frac{ad}{bc}$ if $b,c,d \neq 0$
+   3. $\frac{a}{b} \div \frac{c}{d} = \frac{ad}{bc}$ if $b,c,d \neq 0$
 
      - *Solution*
 
@@ -148,4 +154,128 @@
 	 &= a \cdot b^{-1} \div (d^{-1} \cdot c) \\
 	 &= \frac{a}{b} \div \frac{c}{d}
        \end{align*}
+
+** Exercise 4
+
+   Find all numbers $x$ for which
+
+   1. $4 - x < 3 - 2x$
+
+      - *Solution*
+
+	\begin{align*}
+          4 - x &< 3 - 2x \\
+	  4 - x + 2x &< 3 - 2x + 2x \\
+	  4 + x &< 3 \\
+	  4 + x + (-4) &< 3 + (-4) \\
+	  x &< -1
+	\end{align*}
+
+   2. $5 - x^2 < 8$
+
+      - *Solution*
+
+	\begin{align*}
+	  5 - x^2 &< 8 \\
+	  (-1) \cdot (5 - x^2) &< (-1) \cdot 8 \\
+	  -5 + x^2 &> -8 \\
+	  -5 + 5 + x^2 &> -8 + 5 \\
+	  x^2 &> -3
+	\end{align*}
+
+   3. $5 - x^2 < -2$
+
+      - *Solution*
+
+	\begin{align*}
+	  5 - x^2 &< -2 \\
+	  5 + (-5) - x^2 &< -2 + (-5) \\
+	  -x^2 &< -7 \\
+	  x^2 &> 7 \\
+	  x &> \sqrt{7}
+	\end{align*}
+
+   4. $(x - 1)(x - 3) > 0$
+
+      - *Solution*
+
+	There are two cases, either we're multiplying two negative
+        numbers or two positive numbers.
+
+	In case they are both positive, it means that $x - 1 > 0$ and
+        $x - 3 > 0$, which leads us to conclude that $x > 3$.
+
+	In case they are both negative, it means that $x - 1 < 0$ and
+        $x - 3 < 0$, which leads us to conclude taht $x < 1$.
+
+** Exercise 24
+
+   This problem shows that the actual placement of parentheses in a
+   sum is irrelevant. The proofs involve "mathematical induction"; if
+   you are not familiar with such proofs, but still want to tackle
+   this problem, it can be saved until after Chapter 2, where proofs
+   by induction are explained.
+
+   Let us agree, for definiteness, that $a_1 + \ldots + a_n$ will
+   denote:
+
+   \begin{align*}
+     a_1 + (a_2 + (a_3 + \ldots + (a_{n-2} + (a_{n-1} + a_n))) \ldots )
+   \end{align*}
+
+   Thus, $a_1 + a_2 + a_3$ denotes $a_1 + (a_2 + a_3)$, and $a_1 +
+   a_2 + a_3 + a_4$ denotes $a_1 + (a_2 + (a_3 + a_4))$, etc.
+
+   1. Prove that
+
+      \begin{align*}
+        (a_1 + \ldots + a_k) + a_{k+1} = a_1 + \ldots + a_{k+1}
+      \end{align*}
+
+      - *Solution*
+
+	Let $k=1$, then we can clearly see that $(a_1) = a_1$, and if
+        $k=2$, we have $(a_1) + a_2 = a_1 + a_2$. The premise holds.
+
+	Now, assuming the premise to hold for $k-1$, we have:
+   
+	\begin{align*}
+	  (a_1 + a_2 + \ldots + a_{k-1}) + a_k &= a_1 + \ldots + a_k\\
+	\end{align*}
+
+	Therefore,
+
+	\begin{align*}
+	  (a_1 + a_2 + \ldots + a_{k-1} + a_k) + a_{k+1} &= (a_1 + \ldots + a_{k-1}) + a_k + a_{k+1}\\
+	  &= ((a_1 + \ldots + a_{k-1}) + a_k) + a_{k+1} \\
+	  &= a_1 + \ldots + a_k + a_{k+1} \\
+	\end{align*}
+
+    2. Prove that if $n \geq k$, then
+
+       \begin{align*}
+         (a_1 + \ldots + a_k) + (a_{k+1} + \ldots + a_n) = a_1 + \ldots + a_n
+       \end{align*}
+
+       - *Solution*
+
+	 For the case where $n = k$, it's the same case as previous
+         exercise. Therefore it's proven.
+
+	 For the cases where $n > k$, we have:
+
+	 \begin{align*}
+	   (a_1 + \ldots + a_k) + (a_{k+1} + \ldots + a_n) &= ((a_1 + \ldots + a_k) + a_{k+1}) + (a_{k+2} + \ldots + a_n) \\
+	   &= (a_1 + \ldots a_{k+1}) + (a_{k+2} + \ldots + a_n)\\
+	 \end{align*}
+
+	 The same argument can be applied for $a_{k+3}, a_{k+4},
+         \ldots, a_n$. Therefore
+
+	 \begin{align*}
+	   (a_1 + \ldots + a_k) + (a_{k+1} + \ldots + a_n) &= a_1 + \ldots + a_n\\
+	 \end{align*}
+
+
+	 
 
