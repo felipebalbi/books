@@ -1,3 +1,151 @@
 * Basic Properties of Numbers
 
-** 
+** Prove the following
+
+   - If $ax = a$ for some number $a \neq 0$, then $x = 1$
+
+     - *Solution*
+
+       \begin{align*}
+         ax &= a && \text{Premise} \\
+         ax \cdot a^{-1} &= a \cdot a^{-1} && \text{Multiplicative Inverse} \\
+         x \cdot a \cdot a^{-1} &= a \cdot a^{-1} && \text{Commutative Law} \\
+         x \cdot (a \cdot a^{-1}) &= (a \cdot a^{-1}) && \text{Associative Law} \\
+         x \cdot (1) &= (1) && \text{Multiplicative Inverse} \\
+         x &= 1
+       \end{align*}
+
+   - $x^2 - y^2 = (x - y)(x + y)$
+
+     - *Solution*
+
+       \begin{align*}
+        x^2 - y^2 &= (x - y)(x + y) && \text{Premise} \\
+        &= x \cdot (x + y) + (-y)(x + y) && \text{Distributive Law} \\
+        &= x \cdot x + x \cdot y + (-y) \cdot x + (-y) \cdot y && \text{Distributive Law} \\
+        &= x^2 + x \cdot y + (-x \cdot y) + (-y^2) && \text{Commutative Law} \\
+        &= x^2 + (-y^2) && \text{Additive Inverse} \\
+        &= x^2 - y^2
+       \end{align*}
+
+   - If $x^2 = y^2$, then $x = y$ or $x = -y$
+
+     - *Solution*
+
+       \begin{align*}
+         x^2 &= y^2 && \text{Premise} \\
+         x^2 + (-y^2) &= y^2 + (-y^2) && \text{Add $-y^2$ to both sides} \\
+         x^2 - y^2 &= 0 && \text{Additive inverse} \\
+         (x + y) \cdot (x - y) &= 0 && \text{By previous exercise} \\
+       \end{align*}
+
+       Given this last equality, it follows that we must be multiplying
+       one of the numbers by 0. Therefore, it follows that either $x+y =
+       0$ or $x - y = 0$, and hence:
+
+       \begin{align*}
+         x + y &= 0 && \text{Premise of first case} \\
+         x + y + (-y) &= 0 + (-y) && \text{Add $-y$ to both sides} \\
+         x &= -y && \text{Additive Inverse}
+       \end{align*}
+
+       Or:
+
+       \begin{align*}
+         x - y &= 0 && \text{Premise of second case} \\
+         x - y + y &= 0 + y && \text{Add $-y$ to both sides} \\
+         x &= y && \text{Additive Inverse}
+       \end{align*}
+
+   - $x^3 - y^3 = (x - y)(x^2 + xy + y^2)$
+
+     - *Solution*
+
+       \begin{align*}
+         x^3 - y^3 &= (x - y)(x^2 + xy + y^2) && \text{Premise} \\
+         &= x \cdot (x^2 + xy + y^2) + (-y) \cdot (x^2 + xy + y^2) && \text{Distributive Law}\\
+         &= x^3 + x^2y + xy^2 + (-y)\cdot x^2 + (-y)\cdot xy + (-y)\cdot y^2 \\
+         &= x^3 + x^2y - x^2y + xy^2 - xy^2 - y^3 && \text{Commutative Law} \\
+         &= x^3 - y^3
+       \end{align*}
+
+   - $x^n - y^n = (x - y)(x^{n-1} + x^{n-2}y + \ldots + xy^{n-2} + y^{n-1}$
+
+     - *Solution*
+
+       \begin{align*}
+         x^n - y^n &= (x - y)(x^{n-1} + x^{n-2}y + \ldots + xy^{n-2} + y^{n-1} \\
+	 &= \sum_{i=1}^{n}(x-y)(x^{n-i}y^{i-1}) \\
+	 &= \sum_{i=1}^{n}(x+(-y))(x^{n-i}y^{i-1}) \\
+	 &= \sum_{i=1}^{n}xx^{n-i}y^{i-1} +(-y)(x^{n-i}y^{i-1}) \\
+	 &= \sum_{i=1}^{n}x^{n-i+1}y^{i-1} -x^{n-i}y^{i-1+1} \\
+	 &= \sum_{i=1}^{n}x^{n-i+1}y^{i-1} -x^{n-i}y^{i} \\
+	 &= \sum_{i=1}^{n}x^{n-i+1}y^{i-1} + \sum_{i=1}^{n}-x^{n-i}y^{i} \\
+	 &= \sum_{i=1}^{n}x^{n-i+1}y^{i-1} + \sum_{i=2}^{n+1}-x^{n-i+1}y^{i-1} \\
+	 &= x^n + \sum_{i=2}^{n}x^{n-i+1}y^{i-1} + \sum_{i=2}^{n+1}-x^{n-i+1}y^{i-1} \\
+	 &= x^n + \sum_{i=2}^{n}x^{n-i+1}y^{i-1} + \sum_{i=2}^{n}-x^{n-i+1}y^{i-1} + (-y^n) \\
+	 &= x^n + \sum_{i=2}^{n}[x^{n-i+1}y^{i-1} + (-x^{n-i+1}y^{i-1})] + (-y^n) \\
+	 &= x^n + (-y^n) \\
+	 &= x^n -y^n \\
+       \end{align*}
+
+** What is wrong with the following "proof"? Let $x = y$. Then
+
+   \begin{align*}
+     x^2 &= xy \\
+     x^2 - y^2 &= xy - y^2 \\
+     (x + y)(x - y) &= y(x - y) \\
+     x + y &= y \\
+     2y &= y \\
+     2 &= 1
+   \end{align*}
+
+   - *Solution*
+
+     Division by $x - y = 0$.
+
+** Prove the following
+
+   - $\frac{a}{b} = \frac{ac}{bc}$ if $b, c \neq 0$
+
+     - *Solution*
+
+       \begin{align*}
+         \frac{a}{b} &= \frac{ac}{bc} \\
+	 &= (ac) \cdot (bc)^{-1} \\
+	 &= a \cdot (c \cdot c^{-1}) \cdot b^{-1} \\
+	 &= a \cdot 1 \cdot b^{-1} \\
+	 &= a \cdot b^{-1} \\
+	 &= \frac{a}{b}
+       \end{align*}
+
+   - $\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}$, if $b, d \neq 0$
+
+     - *Solution*
+
+       \begin{align*}
+         \frac{a}{b} + \frac{c}{d} &= \frac{ad + bc}{bd} \\
+	 &= (ad + bc) \cdot (bd)^{-1} \\
+	 &= ad \cdot (bd)^{-1} + bc \cdot (bd)^{-1} \\
+	 &= ad \cdot b^{-1} \cdot d^{-1} + bc \cdot b^{-1} \cdot d^{-1} \\
+	 &= a \cdot b^{-1} \cdot (d \cdot d^{-1}) + (b \cdot b^{-1}) \cdot c \cdot d^{-1} \\
+	 &= a \cdot b^{-1} \cdot 1 + 1 \cdot c \cdot d^{-1} \\
+	 &= a \cdot b^{-1} + c \cdot d^{-1} \\
+	 &= \frac{a}{b} + \frac{c}{d}
+       \end{align*}
+
+   - $\frac{a}{b} \div \frac{c}{d} = \frac{ad}{bc}$ if $b,c,d \neq 0$
+
+     - *Solution*
+
+       \begin{align*}
+         \frac{a}{b} \div \frac{c}{d} &= \frac{ad}{bc} \\
+	 &= ad \cdot (bc)^{-1} \\
+	 &= a \cdot d \cdot b^{-1} \cdot c^{-1} \\
+	 &= a \cdot b^{-1} \cdot d \cdot c^{-1} \\
+	 &= a \cdot b^{-1} \div (d \cdot c^{-1})^{-1} \\
+	 &= a \cdot b^{-1} \div (d^{-1} \cdot c^{(-1) \cdot (-1)}) \\
+	 &= a \cdot b^{-1} \div (d^{-1} \cdot c) \\
+	 &= \frac{a}{b} \div \frac{c}{d}
+       \end{align*}
+
