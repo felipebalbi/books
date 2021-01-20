@@ -1,0 +1,109 @@
+* Chapter 1: Logic
+
+** Statements, Propositions, and Theorems
+
+   *Axioms* are statements defined to be /true/. From those we
+   construct new /true/ statements by applying a system of rules
+   referred to as our laws of *logic*, *deduction*, *inference*, or
+   *proof*.
+
+   A statement that is an axiom or has been proved to be true is
+   called a *theorem*.
+
+   In a mathematical system, the /true/ and /false/ statements are the
+   *propositions* of the system, and the labels /true/ or /false/
+   associated with a particular proprosition are its *truth value*.
+
+   To prevent mathematical discussion from becoming incoherent, the
+   procedure for assigning truth values to new propositions has to be
+   standardized. These assignments are made in a way that is *truth
+   functional*. This means that the truth value of a new proposition
+   depends only on the truth value of its component propositions and
+   on the way in which those components have been linked to form a new
+   one.
+
+*** Exercises
+
+    1. In each case say whether or not the given statement is a
+       proposition. If it is a proposition indicate its truth
+       value. If it is not a proposition, explain /why/ it is not, and
+       then mold it into a proposition by suitable rewriting.
+
+       (a) Lemuel Harrington, of Burbang, California, was President of
+       the United States on July 18, 1897.
+
+           *Proposition*, /false/
+
+       (b) $x/x = 1$
+
+           *Not proposition*. It either needs to be quantified or a
+           value assigned to $x$
+
+       (c) $13 + 24 = 35$
+
+           *Proposition*, /true/
+
+       (d) "The Star Spangled Banner" was played on that occasion.
+
+           *Not proposition*, a particular occasion needs to be
+           defined
+
+       (e) $x$ is positive, negative, or zero
+
+           *Not proposition*, $x$ could be a banana :-p
+
+       (f) If $x$ is a real number, then $x$ is positive, negative, or
+           zero
+
+           *Proposition*, /true/
+
+    2. Jones says, "On election day I will vote for the Democratic
+       candidate for President or for the Republican candidate for
+       President". Smith says, "Tomorrow I will take you to the movies
+       or I will take you out to dinner".
+
+       (a) In each case, describe the circumstances under which the
+       speaker can be said to be dishonest.
+
+          *Jones:* doesn't vote. *Smith:* neither takes you to dinner
+          nor takes you to the movies
+
+       (b) Example 1.3 showed that "because" is not truth
+       functional. Does the answer to (a) suggest that "or" is not
+       truth functional?
+
+          *no*
+
+    3. $S \to aSa \mid bSb \mid \ldots \mid zSz \mid a \mid b \mid
+       \ldots \mid z$
+
+       Theorems in this system are all statements whose composing
+       letters are palindromes (read the same from either side). One
+       English sentence in this system can be produced by:
+
+       \begin{align*}
+         S                   && \text{axiom}  \\
+         aSa                 && \text{rule 1} \\
+         abSba               && \text{rule 1} \\
+         ablSlba             && \text{rule 1} \\
+         ableSelba           && \text{rule 1} \\
+         ablewSwelba         && \text{rule 1} \\
+         ablewaSawelba       && \text{rule 1} \\
+         ablewasSsawelba     && \text{rule 1} \\
+         ablewasiSisawelba   && \text{rule 1} \\
+         ablewasieSeisawelba && \text{rule 1} \\
+         ablewasiereisawelba && \text{rule 2} \\
+       \end{align*}
+
+    4. *axiom*: groan
+
+       (a) Prove this proposition: cloth
+
+       groan, groin, grown, crown, clown, clows, clots, cloth
+
+       (b) to prove that a proposition is false one can start by
+       showing that the given english word doesn't exist. If the it
+       does exist, we would have to show that there is not path among
+       5 letter english words from /groan/ to the end word where each
+       word along the way has a edit distance of 1.
+
