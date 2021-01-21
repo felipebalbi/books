@@ -107,3 +107,73 @@
        5 letter english words from /groan/ to the end word where each
        word along the way has a edit distance of 1.
 
+** Logical Connectives and Truth Tables
+
+   The *negation* of a term is formed by the logical /not/. Its
+   symbols are $\neg$ or $\sim$. Truth table for logical negation is
+   as follows:
+
+   | $P$ | $\neg P$ |
+   |-----+----------|
+   | F   | T        |
+   | T   | F        |
+
+   The *conjunction* of $P$ and $Q$ can be formed with the logical
+   connective /and/. Symbolized as $P \land Q$. Truth table as
+   follows:
+
+   | $P$ | $Q$ | $P \land Q$ |
+   |-----+-----+-------------|
+   | F   | F   | F           |
+   | F   | T   | F           |
+   | T   | F   | F           |
+   | T   | T   | T           |
+
+   The truth value of $P \land Q$ depends solely on the truth values
+   of $P$ and $Q$. Moreover, there needs to be no connection between
+   the subject matter of $P$ and that of $Q$.
+
+   The expression $P \land Q$ is not itself a statement, but it
+   /becomes/ one when the letters $P$ and $Q$ are replaced by
+   statements. Expressions that become statements are called
+   *statement forms* or *sentential forms*; the letters in such forms
+   are called *statement variables* or *setential variables*.
+
+   The *disjunction* of $P$ and $Q$ is formed by the logical
+   connective /or/. Unless explicitly stated, logical /or/ is always
+   *inclusive*, meaning that "$P$ or $Q$" is true when $P$ is true, or
+   when $Q$ is true, or when both $P$ and $Q$ are true.
+
+   The symbolic form of $P$ or $Q$ is $P \lor Q$. The truth table is
+   as follows:
+
+   | $P$ | $Q$ | $P \lor Q$  |
+   |-----+-----+-------------|
+   | F   | F   | F           |
+   | F   | T   | T           |
+   | T   | F   | T           |
+   | T   | T   | T           |
+
+   With these three connectives (i.e. $\neg$, $\land$, and $\lor$) we
+   can already combine statements into complex
+   expressions. Parethenses can be used to guide the expression
+   evaluation.
+
+   To convert a proposition into a logic expression, we should
+   decompose the given proposition into *atomic propositions*, label
+   each with a setential variable, and apply logical connectives.
+
+   For example, the statement:
+
+   /I will go to the movies on Monday or Tuesday, but not on both
+   days/.
+
+   Can be broken into the atomic propositions:
+
+   - $P$: I will go to the movies on Monday.
+   - $Q$: I will go to the movies on Tuesday.
+
+   These can be combined with logical connectives to represent the
+   original statement:
+
+   $$(P \lor Q) \land \neg(P \land Q)$$
