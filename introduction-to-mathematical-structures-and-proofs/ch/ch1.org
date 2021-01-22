@@ -177,3 +177,49 @@
    original statement:
 
    $$(P \lor Q) \land \neg(P \land Q)$$
+
+** Conditional Statements
+
+   A proposition of the form $P \implies Q$ is called a *conditional
+   proposition* or a *material implication*. The proposition $P$ is
+   referred to as the *antecedent* or *hypothesis* of the conditional
+   proposition, and $Q$ is called the *consequent* or *conclusion*.
+
+   There are many ways to verbalize $P \implies Q$:
+
+   - If $P$, then $Q$
+   - $P$ only if $Q$
+   - $Q$ if $P$
+   - $P$ is sufficient for $Q$
+   - $Q$ is necessary for $P$
+
+   The truth table for material implication is as follows:
+
+   | $P$ | $Q$ | $P \implies Q$ |
+   |-----+-----+----------------|
+   | F   | F   | T              |
+   | F   | T   | T              |
+   | T   | F   | F              |
+   | T   | T   | T              |
+
+   When the implication is valid "for both directions", i.e.:
+
+   $$P \implies Q \land P \Longleftarrow Q$$
+
+   It can be abbreviated by:
+
+   $$P \iff Q$$
+   
+   The implication $P \Longleftarrow Q$ is called the *converse* of $P
+   \implies Q$.
+
+   The proposition $P \iff Q$ is called a *biconditional proposition*
+   or a *material equivalence*. Its truth table states that $P$ and
+   $Q$ are *equivalent propositions*:
+
+   | $P$ | $Q$ | $P \iff Q$ |
+   |-----+-----+------------|
+   | F   | F   | T          |
+   | F   | T   | F          |
+   | T   | F   | F          |
+   | T   | T   | T          |
