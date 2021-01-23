@@ -223,3 +223,54 @@
    | F   | T   | F          |
    | T   | F   | F          |
    | T   | T   | T          |
+*** Exercises
+
+    1. $P = \text{Howard fell}$ and $Q = \text{Howard broke his leg}$
+
+      (a) English sentences
+
+          - $P \land Q$ Howard fell and broke his leg
+
+          - $\neg P \land \neg Q$ Howard didn't fall and didn't break
+	    his leg
+
+	  - $\neg(P \land Q)$ It is not the case that Howard fell and
+	    broke his leg
+
+	  - $Q \lor \neg P$ Howard broke his leg or didn't fall
+
+      (b) $P$ or $Q$ true.
+
+          - Inclusive: Howard fell, Howard broke his leg, Howard fell
+            and broke his leg
+
+          - Exclusive: Howard fell, Howard broke his leg
+
+    2. "If today is Wednesday, then today is Thrusday."
+
+       Only false when today _is_ Wednesday
+
+    3. $P \oplus Q$ (exclusive-or)
+
+       | $P$ | $Q$ | $P \oplus Q$ |
+       |-----+-----+--------------|
+       | F   | F   | F            |
+       | F   | T   | T            |
+       | T   | F   | T            |
+       | T   | T   | F            |
+
+    4. $P u Q$ denotes $P$ unless $Q$
+
+       Assuming /unless/ to be the same as /if not/, we can translate
+       $P u Q$ into $\neg Q \implies P$, therefore:
+
+       | $P$ | $Q$ | $\neg Q$ | $P u Q$ |
+       |-----+-----+----------+---------|
+       | F   | F   | T        | F       |
+       | F   | T   | F        | T       |
+       | T   | F   | T        | T       |
+       | T   | T   | F        | T       |
+
+       The last line in the table states that we had a picnic and it
+       was raining, but that goes against the premise.
+
