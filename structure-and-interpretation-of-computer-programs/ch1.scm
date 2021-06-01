@@ -104,3 +104,69 @@
   (cond ((= times 0) #t)
 	((fermat-test n) (fast-prime? n (- times 1)))
 	(else #f)))
+
+(define (smallest-divisor n)
+  (find-divisor n 2))
+
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+	((divides? test-divisor n) test-divisor)
+	(else (find-divisor n (+ test-divisor 1)))))
+
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+(define (ex1.21)
+  (display (smallest-divisor 199))
+  (newline)
+  (display (smallest-divisor 1999))
+  (newline)
+  (display (smallest-divisor 19999))
+  (newline))
+
+(define (prime? n)
+  (fast-prime? n 100))
+
+(define (timed-prime-test n)
+  (newline)
+  (display n)
+  (start-prime-test n (real-time)))
+
+(define (start-prime-test n start-time)
+  (if (prime? n)
+      (report-prime (- (real-time) start-time))))
+
+(define (report-prime elapsed-time)
+  (display " *** ")
+  (display elapsed-time)
+  (newline))
+
+(define (search-for-primes start end)
+  (define (iter n)
+    (cond ((<= n end)
+	   (timed-prime-test n)
+	   (iter (+ n 2)))))
+  (iter (if (odd? start)
+	    start
+	    (+ start 1))))
+
+(define (smallest-divisor-with-next n)
+  (find-divisor-with-next n 2))
+
+(define (next test-divisor)
+  (if (= test-divisor 2)
+      3
+      (+ test-divisor 2)))
+
+(define (find-divisor-with-next n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+	((divides? test-divisor n) test-divisor)
+	(else (find-divisor-with-next n (next test-divisor)))))
+
+(define (ex1.23)
+  (display (smallest-divisor-with-next 199))
+  (newline)
+  (display (smallest-divisor-with-next 1999))
+  (newline)
+  (display (smallest-divisor-with-next 19999))
+  (newline)))
