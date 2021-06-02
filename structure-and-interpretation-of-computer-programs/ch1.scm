@@ -169,4 +169,74 @@
   (display (smallest-divisor-with-next 1999))
   (newline)
   (display (smallest-divisor-with-next 19999))
-  (newline)))
+  (newline))
+
+(define (sum term a next b)
+  (if (> a b)
+      0
+      (+ (term a)
+	 (sum term (next a) next b))))
+
+(define (cube x)
+  (* x x x))
+
+(define (simpson f a b n)
+  (define h (/ (- b a) n))
+  (define (yk k) (f (+ a (* h k))))
+  (define (term k)
+    (* (cond ((or (= k 0) (= k n)) 1.0)
+	     ((odd? k) 4.0)
+	     (else 2.0))
+       (yk k)))
+  (* (/ h 3) (sum term 0.0 1+ n)))
+
+(define (ex1.29)
+  (display (simpson cube 0 1 100))
+  (newline)
+  (display (simpson cube 0 1 1000))
+  (newline))
+
+(define (sum-iter term a next b)
+  (define (iter a result)
+    (if (> a b)
+	result
+	(iter (next a) (+ result (term a)))))
+  (iter a 0))
+
+(define (ex1.30)
+  (define (simpson-iter f a b n)
+  (define h (/ (- b a) n))
+  (define (yk k) (f (+ a (* h k))))
+  (define (term k)
+    (* (cond ((or (= k 0) (= k n)) 1.0)
+	     ((odd? k) 4.0)
+	     (else 2.0))
+       (yk k)))
+  (* (/ h 3) (sum-iter term 0.0 1+ n)))
+
+  (display (simpson-iter cube 0 1 100))
+  (newline))
+
+(define (product term a next b)
+  (define (iter a result)
+    (if (> a b)
+	result
+	(iter (next a) (* result (term a)))))
+  (iter a 1))
+
+(define (factorial n)
+  (define (identity x) x)
+  (product identity 1 1+ n))
+
+(define (pi-approx n)
+  (define (term k)
+    (if (even? k)
+	(/ (+ k 2) (+ k 1))
+	(/ (+ k 1) (+ k 2))))
+  (* 4 (product term 1.0 1+ n)))
+
+(define (ex1.31)
+  (display (factorial 5))
+  (newline)
+  (display (pi-approx 10000))
+  (newline))
