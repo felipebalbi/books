@@ -82,9 +82,9 @@
   (fib n))
 
 (define (gcd a b)
-  (if (= b 0)
-      a
-      (gcd b (remainder a b))))
+  (cond ((< a b) (gcd b a))
+	((= b 0) a)
+	(else (gcd b (remainder a b)))))
 
 (define (expmod base exp m)
   (cond ((= exp 0) 1)
@@ -239,4 +239,46 @@
   (display (factorial 5))
   (newline)
   (display (pi-approx 10000))
+  (newline))
+
+; Good old left fold
+(define (accumulate combiner null-value term a next b)
+  (define (iter a result)
+    (if (> a b)
+	result
+	(iter (next a) (combiner result (term a)))))
+  (iter a null-value))
+
+
+(define (ex1.32)
+  (define (identity x) x)
+
+  (define (accumulate-product term a next b)
+    (accumulate * 1 term a next b))
+
+  (define (accumulate-sum term a next b)
+    (accumulate + 0 term a next b))
+
+  (display (accumulate-product identity 1 1+ 10))
+  (newline)
+  (display (accumulate-sum identity 1 1+ 10))
+  (newline))
+
+(define (filtered-accumulate filter combiner null-value term a next b)
+  (define (iter a result)
+    (cond ((> a b) result)
+	  ((filter a) (iter (next a) result))
+	  (else (iter (next a) (combiner result (term a))))))
+  (iter a null-value))
+
+(define (relative-prime? a b) 
+  (= (gcd a b) 1)) 
+
+(define (product-relative-primes n) 
+  (define (filter k) 
+    (relative-prime? k n))
+  (filtered-accumulate filter * 1 identity 1 1+ n))
+
+(define (ex1.33)
+  (display (product-relative-primes 10))
   (newline))
