@@ -35,7 +35,6 @@
 (define (ex1.16 b n)
   (fast-expt-iter b n))
 
-;;; 1.17
 (define (fast-mult a b)
   (cond ((= b 0) 0)
 	((even? b) (fast-mult (double a) (halve b)))
@@ -44,7 +43,6 @@
 (define (ex1.17 a b)
   (fast-mult a b))
 
-;;; 1.18
 (define (fast-mult-iter a b)
   (define (double x)
     (+ x x))
@@ -248,7 +246,6 @@
 	result
 	(iter (next a) (combiner result (term a)))))
   (iter a null-value))
-
 
 (define (ex1.32)
   (define (identity x) x)
