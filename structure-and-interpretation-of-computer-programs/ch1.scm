@@ -279,3 +279,90 @@
 (define (ex1.33)
   (display (product-relative-primes 10))
   (newline))
+
+(define (average a b)
+  (/ (+ a b) 2))
+
+(define (close-enough? a b)
+  (< (abs (- a b)) 0.000001))
+
+(define (search f neg-point pos-point)
+  (let ((midpoint (average neg-point pos-point)))
+    (if (close-enough? neg-point pos-point)
+	midpoint
+	(let ((test-value (f midpoint)))
+	  (cond ((positive? test-value)
+		 (search f neg-point midpoint))
+		((negative? test-value)
+		 (search f midpoint pos-point))
+		(else midpoint))))))
+
+(define (half-interval-method f a b)
+  (let ((a-value (f a))
+	(b-value (f b)))
+    (cond ((and (negative? a-value) (positive? b-value))
+	   (search f a b))
+	  ((and (negative? b-value) (positive? a-value))
+	   (search f b a))
+	  (else
+	   (error "values are not of opposit sign" a b)))))
+
+(display (half-interval-method sin 2.0 4.0))
+(display (half-interval-method
+	  (lambda (x) (- (* x x x) (* 2 x) 3))
+	  1.0
+	  2.0))
+
+(define tolerance 0.000001)
+
+(define (fixed-point f first-guess)
+  (define (close-enough? v1 v2)
+    (< (abs (- v1 v2)) tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+	  next
+	  (try next))))
+  (try first-guess))
+
+(define golden-ratio
+  (fixed-point (lambda (x) (+ 1 (/ 1 x))) 1.0))
+
+(define (ex1.35) golden-ratio)
+
+(define (fixed-point-print f first-guess)
+  (define (close-enough? v1 v2)
+    (< (abs (- v1 v2)) tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (display guess)
+      (newline)
+      (if (close-enough? guess next)
+	  next
+	  (try next))))
+  (try first-guess))
+
+(define (ex1.36)
+  (fixed-point-print
+   (lambda (x)
+     (/ (log 1000) (log x)))
+   10))
+
+(define (cont-frac n d k)
+  (define (iter i partial)
+    (if (= i 0)
+	partial
+	(iter (- i 1) (/ (n i) (+ (d i) partial)))))
+  (iter k 0))
+
+(define (ex1.37)
+  (cont-frac (lambda (i) 1.0) (lambda (i) 1.0) 10000))
+
+(define (ex1.38)
+  (+ 2 (cont-frac
+	(lambda (i) 1.0)
+	(lambda (i) 
+	  (if (= (remainder i 3) 2) 
+	      (/ (+ i 1) 1.5) 
+	      1))
+	1000)))
