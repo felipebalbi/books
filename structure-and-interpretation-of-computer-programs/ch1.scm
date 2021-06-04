@@ -366,3 +366,13 @@
 	      (/ (+ i 1) 1.5) 
 	      1))
 	1000)))
+
+(define (tan-cf x k)
+  (cont-frac
+   (lambda (i) (if (= i 1) x (- (square x))))
+   (lambda (i) (- (* i 2) 1))
+   k))
+
+(define (ex1.39)
+  (display (tan-cf 0.25 1000000))
+  (newline))
