@@ -376,3 +376,29 @@
 (define (ex1.39)
   (display (tan-cf 0.25 1000000))
   (newline))
+
+(define dx 0.0001)
+
+(define (deriv g)
+  (lambda (x)
+    (/ (- (g (+ x dx))) (g x))
+    dx))
+
+(define (cube x) (* x x x))
+
+(define (newton-transform g)
+  (lambda (x)
+    (- x (/ (g x) ((deriv g) x)))))
+
+(define (newtons-method g guess)
+  (fixed-point (newton-transform g) guess))
+
+(define (cubic a b c)
+  (lambda (x)
+    (+ (cube x)
+       (* a (square x))
+       (* b x)
+       c)))
+
+(define (ex1.40)
+  (newtons-method (cubic 1 1 1) 1))
