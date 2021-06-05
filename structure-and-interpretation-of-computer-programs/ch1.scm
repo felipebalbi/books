@@ -443,3 +443,39 @@
 
 (define (n-fold-smooth f n)
   (repeated f n))
+
+(define (average-damp f)
+  (lambda (x) (average x (f x))))
+
+(define (log2 x)
+  (/ (log x) (log 2)))
+
+(define (nth-root n x)
+  (fixed-point ((repeated average-damp (floor (log2 n)))
+		(lambda (y) (/ x (fast-expt y (- n 1)))))
+               1.0))
+
+(define (ex1.44)
+  (display (nth-root 5 5))
+  (newline))
+
+(define (good-enough? v1 v2)
+  (< (abs (- v1 v2)) tolerance))
+
+(define (iterative-improve good-enough? improve)
+  (define (iter guess)
+    (if (good-enough? guess)
+	guess
+	(iter (improve guess))))
+  iter)
+
+(define (sqrt-improve x)
+  ((iterative-improve
+    (lambda (y)
+      (< (abs (- (square y) x)) tolerance))
+    (lambda (y) (average y (/ x y))))
+   1.0))
+
+(define (ex1.46)
+  (display (sqrt-improve 2))
+  (newline))
