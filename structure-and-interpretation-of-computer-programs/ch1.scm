@@ -402,3 +402,44 @@
 
 (define (ex1.40)
   (newtons-method (cubic 1 1 1) 1))
+
+(define (double f)
+  (lambda (x)
+    (f (f x))))
+
+(define (inc x)
+  (+ x 1))
+
+(define (ex1.41)
+  (display (((double (double double)) inc) 5))
+  (newline))
+
+(define (compose f g)
+  (lambda (x)
+    (f (g x))))
+
+(define (ex1.42)
+  (display ((compose square inc) 6))
+  (newline))
+
+(define (identity x) x)
+
+(define (repeated f n)
+  (if (< n 1)
+      identity
+      (compose f (repeated f (- n 1)))))
+
+(define (ex1.43)
+  (display ((repeated square 2) 5))
+  (newline))
+
+(define (smooth f)
+  (lambda (x)
+    (/
+     (+ (f (- x dx))
+	(f x)
+	(f (+ x dx)))
+     3)))
+
+(define (n-fold-smooth f n)
+  (repeated f n))
