@@ -192,4 +192,83 @@
 (define (add-1 n)
   (lambda (f) (lambda (x) (f ((n f) x)))))
 
-;;; Exercise 2.5 will take some work :-)
+;;; This stuff is mindboggling
+(define one (lambda (f) (lambda (x) (f x))))
+(define two (lambda (f) (lambda (x) (f (f x)))))
+(define three (lambda (f) (lambda (x) (f (f (f x))))))
+(define four (lambda (f) (lambda (x) (f (f (f (f x)))))))
+
+(define (add a b)
+  (lambda (f) (lambda (x) ((a f) ((b f) x)))))
+
+(define (ex2.6)
+  (display (add three four))
+  (newline))
+
+(define (make-interval a b) (cons a b))
+
+;;; If we assume lower bound always first, we can use `car'
+;;; and `cdr' directly. For the sake of completeness, let's
+;;; not make such assumption and take the lower bound to be
+;;; the minimum between `car z' and `cdr z'. Upper bound is
+;;; analogous.
+(define (lower-bound z) (min (car z) (cdr z)))
+(define (upper-bound z) (max (car z) (cdr z)))
+
+(define (add-interval x y)
+  (make-interval (+ (lower-bound x) (lower-bound y))
+		 (+ (upper-bound x) (upper-bound y))))
+
+(define (mul-interval x y)
+  (let ((p1 (* (lower-bound x) (lower-bound y)))
+	(p2 (* (lower-bound x) (upper-bound y)))
+	(p3 (* (upper-bound x) (lower-bound y)))
+	(p4 (* (upper-bound x) (upper-bound y))))
+    (make-interval (min p1 p2 p3 p4)
+		   (max p1 p2 p3 p4))))
+
+(define (div-interval x y)
+  (mul-interval x
+		(make-interval (/ 1.0 (upper-bound y))
+			       (/ 1.0 (lower-bound y)))))
+
+(define interval1 (make-interval 8 2))
+(define interval2 (make-interval -2 4))
+
+(define (print-interval interval)
+  (display "[")
+  (display (lower-bound interval))
+  (display ", ")
+  (display (upper-bound interval))
+  (display "]"))
+
+(define (ex2.7)
+  (print-interval interval1)
+  (newline))
+
+(define (sub-interval x y)
+  (add-interval x
+		(make-interval (- (upper-bound y))
+			       (- (lower-bound y)))))
+
+(define (ex2.8)
+  (print-interval (sub-interval interval1 interval2))
+  (newline))
+
+(define (width-interval x)
+  (/ (- (upper-bound x) (lower-bound x)) 2))
+
+(define (div-interval x y)
+  (if (<= (* (lower-bound y) (upper-bound y)) 0)
+      (error "Division error" y)
+      (mul-interval
+       x
+       (make-interval
+	(/ 1.0 (upper-bound y))
+        (/ 1.0 (lower-bound y))))))
+
+(define span0 (make-interval -1 1))
+
+(define (ex2.10)
+  (div-interval interval1 span0))
+
