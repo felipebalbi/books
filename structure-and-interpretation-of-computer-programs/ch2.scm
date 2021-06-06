@@ -272,3 +272,29 @@
 (define (ex2.10)
   (div-interval interval1 span0))
 
+;;; ex2.11 is complicated. In summary, we must consider that
+;;; each interval has 3 cases:
+;;;
+;;; 1. both ends positive
+;;; 2. both ends negative
+;;; 3. one positive, one negative
+;;;
+;;; Because we're multiplying 2 intervals, there's are 9
+;;; possible cases (i.e. 3 * 3).
+;;;
+;;; The difficult part is figuring out how to multiply
+;;; depending on each of these cases.
+;;;
+;;; These little helpers below, will aid with finding out
+;;; the three cases for each interval.
+(define (opposite-signs a b)
+  (or (and (negative? a) (possitive? b))
+      (and (positive? a) (negative? b))))
+
+(define (both-positive a b)
+  (and (positive? a) (positive? b)))
+
+(define (both-negative a b)
+  (and (negative? a) (negative? b)))
+
+
