@@ -78,4 +78,67 @@
 (define (ex2.2)
   (print-point midpoint))
 
+;;; Representing a rectangle as its corner points
+;;;
+;;; Another possibility would be to represent the rectangle
+;;; as a point followed by width and height. Only the
+;;; internal methods `bottom-left', `top-right',
+;;; `bottom-right', and `top-left' would have to be
+;;; modified. Everything else remains the same.
+;;;
+;;; Too lazy to implement that, but shouldn't be hard if we
+;;; make the rectangle a cons of a cons, i.e.:
+;;;
+;;;	(define (make-rect point width height)
+;;;	  (cons point (cons width height)))
+;;;
+;;; We could also simplify the representation above and
+;;; below by assuming rectangles to always be axis aligned
+;;; starting on the origin. This should be okay if we also
+;;; assume that transformations (translation, rotation,
+;;; scaling) are applied after the fact.
+;;;
+;;; If we go down that route, every rectangle is
+;;; representable by a single point (top-left corner) or a
+;;; pair (width . height). We can assume the other point to
+;;; be (0 . 0).
+(define (make-rect bottom-left top-right)
+  (cons bottom-left top-right))
 
+(define (bottom-left rect)
+  (car rect))
+
+(define (top-right rect)
+  (cdr rect))
+
+(define (bottom-right rect)
+  (make-point (x-point (top-right rect))
+	      (y-point (bottom-left rect))))
+
+(define (top-left rect)
+  (make-point (x-point (bottom-left rect))
+	      (y-point (top-right rect))))
+
+(define (height-rect rect)
+  (let ((top-y (y-point (top-right rect)))
+	(bottom-y (y-point (bottom-left rect))))
+    (- top-y bottom-y)))
+
+(define (width-rect rect)
+  (let ((left-x (x-point (bottom-left rect)))
+	(right-x (x-point (top-right rect))))
+    (- right-x left-x)))
+
+(define (perimeter-rect rect)
+  (+ (* (width-rect rect) 2)
+     (* (height-rect rect) 2)))
+
+(define (area-rect rect)
+  (* (width-rect rect) (height-rect rect)))
+
+(define (ex2.3)
+  (let ((r (make-rect (make-point 0 0) (make-point 2 3))))
+    (display (area-rect r))
+    (newline)
+    (display (perimeter-rect r))
+    (newline)))
