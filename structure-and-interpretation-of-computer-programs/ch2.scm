@@ -142,3 +142,54 @@
     (newline)
     (display (perimeter-rect r))
     (newline)))
+
+(define (kons x y)
+  (define (dispatch m)
+    (cond ((= m 0) x)
+	  ((= m 1) y)
+	  (else (error "Argument not 0 or 1 -- KONS" m))))
+  dispatch)
+
+(define (kar z) (z 0))
+(define (kdr z) (z 1))
+
+(define (qons x y)
+  (lambda (m) (m x y)))
+
+(define (qar z)
+  (z (lambda (p q) p)))
+
+(define (qdr z)
+  (z (lambda (p q) q)))
+
+(define (ex2.4)
+  (display (qdr (qons 1 2)))
+  (newline))
+
+(define (int-cons a b)
+  (* (expt 2 a) (expt 3 b)))
+
+(define (largest-power-of-n n z)
+  (if (= (remainder z n) 0)
+      (+ 1 (largest-power-of-n n (/ z n)))
+      0))
+
+(define (int-car z)
+  (largest-power-of-n 2 z))
+
+(define (int-cdr z)
+  (largest-power-of-n 3 z))
+
+(define (ex2.5)
+  (let ((z (int-cons 3 4)))
+    (display (int-car z))
+    (newline)
+    (display (int-cdr z))
+    (newline)))
+
+(define zero (lambda (f) (lambda (x) x)))
+
+(define (add-1 n)
+  (lambda (f) (lambda (x) (f ((n f) x)))))
+
+;;; Exercise 2.5 will take some work :-)
