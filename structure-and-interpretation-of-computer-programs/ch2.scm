@@ -359,3 +359,28 @@
 (define (ex2.11)
   (print-interval (mul-interval interval1 interval2))
   (newline))
+
+(define (make-center-width c w)
+  (make-interval (- c w) (+ c w)))
+
+(define (center i)
+  (/ (+ (lower-bound i) (upper-bound i)) 2))
+
+(define (width i)
+  (/ (- (upper-bound i) (lower-bound i)) 2))
+
+(define (make-center-percent c p)
+  (let ((delta (* c (/ p 100.0))))
+    (make-interval (- c delta) (+ c delta))))
+
+(define (percent i)
+  (let* ((center (center i))
+	 (delta (width i)))
+    (/ (* delta 100) center)))
+
+(define (ex2.12)
+  (let ((interval (make-center-percent 5 5)))
+  (print-interval interval)
+  (newline)
+  (display (percent interval))
+  (newline)))
