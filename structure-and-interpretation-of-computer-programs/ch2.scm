@@ -380,7 +380,7 @@
 
 (define (ex2.12)
   (let ((interval (make-center-percent 5 5)))
-  (print-interval interval)
-  (newline)
-  (display (percent interval))
-  (newline)))
+    (print-interval interval)
+    (newline)
+    (display (percent interval))
+    (newline)))
