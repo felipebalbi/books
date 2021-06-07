@@ -287,14 +287,75 @@
 ;;;
 ;;; These little helpers below, will aid with finding out
 ;;; the three cases for each interval.
-(define (opposite-signs a b)
-  (or (and (negative? a) (possitive? b))
-      (and (positive? a) (negative? b))))
+(define (opposite-signs? x)
+  (or (and (negative? (lower-bound x))
+	   (positive? (upper-bound x)))
+      (and (positive? (lower-bound x))
+	   (negative? (upper-bound x)))))
 
-(define (both-positive a b)
-  (and (positive? a) (positive? b)))
+(define (both-positive? x)
+  (and (positive? (lower-bound x))
+       (positive? (upper-bound x))))
 
-(define (both-negative a b)
-  (and (negative? a) (negative? b)))
+(define (both-negative? x)
+  (and (negative? (lower-bound x))
+       (negative? (upper-bound x))))
 
+;;; I was lucky to find a nice paper on interval
+;;; multiplication
+;;;
+;;; http://fab.cba.mit.edu/classes/S62.12/docs/Hickey_interval.pdf
+;;;
+;;; Acording to the paper, we can simplify our
+;;; multiplications like so:
+;;;
+;;; | sign int1 | sign int2 | lower bound       | upper bound       |
+;;; |-----------+-----------+-------------------+-------------------|
+;;; | P         | P         | x1*x2             | y1*y2             |
+;;; | P         | N         | y1*x2             | x1*y2             |
+;;; | P         | M         | y1*x2             | y1*y2             |
+;;; |-----------+-----------+-------------------+-------------------|
+;;; | N         | P         | x1*y2             | y1*x2             |
+;;; | N         | N         | y1*y2             | x1*x2             |
+;;; | N         | M         | x1*y2             | x1*x2             |
+;;; |-----------+-----------+-------------------+-------------------|
+;;; | M         | P         | x1*y2             | y1*y2             |
+;;; | M         | N         | y1*x2             | x1*x2             |
+;;; | M         | M         | min(x1*y2, y1*x2) | max(x1*x2, y1*y2) |
+(define (mul-interval x y)
+  (cond
+   ((and (both-positive? x) (both-positive? y))
+    (make-interval (* (lower-bound x) (lower-bound y))
+		   (* (upper-bound x) (upper-bound y))))
+   ((and (both-positive? x) (both-negative? y))
+    (make-interval (* (upper-bound x) (lower-bound y))
+		   (* (lower-bound x) (upper-bound y))))
+   ((and (both-positive? x) (opposite-signs? y))
+    (make-interval (* (upper-bound x) (lower-bound y))
+		   (* (upper-bound x) (upper-bound y))))
 
+   ((and (both-negative? x) (both-positive? y))
+    (make-interval (* (lower-bound x) (upper-bound y))
+		   (* (upper-bound x) (lower-bound y))))
+   ((and (both-negative? x) (both-negative? y))
+    (make-interval (* (upper-bound x) (upper-bound y))
+		   (* (lower-bound x) (lower-bound y))))
+   ((and (both-negative? x) (opposite-signs? y))
+    (make-interval (* (lower-bound x) (upper-bound y))
+		   (* (lower-bound x) (lower-bound y))))
+
+   ((and (opposite-signs? x) (both-positive? y))
+    (make-interval (* (lower-bound x) (upper-bound y))
+		   (* (upper-bound x) (upper-bound y))))
+   ((and (opposite-signs? x) (both-negative? y))
+    (make-interval (* (upper-bound x) (lower-bound y))
+		   (* (lower-bound x) (lower-bound y))))
+   (else ; (and (opposite-signs? x) (opposite-signs y))
+    (make-interval (min (* (lower-bound x) (upper-bound y))
+			(* (upper-bound x) (lower-bound y)))
+		   (max (* (lower-bound x) (lower-bound y))
+			(* (upper-bound x) (upper-bound y)))))))
+
+(define (ex2.11)
+  (print-interval (mul-interval interval1 interval2))
+  (newline))
