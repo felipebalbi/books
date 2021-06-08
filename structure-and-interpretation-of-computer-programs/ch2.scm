@@ -384,3 +384,40 @@
     (newline)
     (display (percent interval))
     (newline)))
+
+(define (last-pair lst)
+  (if (= (length lst) 1)
+      lst
+      (last-pair (cdr lst))))
+
+(define (ex2.17)
+  (display (last-pair (list 1 2 3 4 5)))
+  (newline))
+
+(define (reverse lst)
+  (define (iter items result)
+    (if (null? items)
+	result
+	(iter (cdr items) (cons (car items) result))))
+  (iter lst '()))
+
+(define (ex2.18)
+  (display (reverse (list 1 2 3 4)))
+  (newline))
+
+(define (cc amount coin-values)
+  (cond ((= amount 0) 1)
+	((or (< amount 0) (no-more? coin-values)) 0)
+	(else (+ (cc amount
+		     (except-first-denomination coin-values))
+		 (cc (- amount
+			(first-denomination coin-values))
+		     coin-values)))))
+
+(define (no-more? coin-values) (null? coin-values))
+(define (first-denomination coin-values) (car coin-values))
+(define (except-first-denomination coin-values) (cdr coin-values))
+
+(define us-coins (list 50 25 10 5 1))
+(define uk-coins (list 100 50 20 10 5 2 1 0.5))
+(define euro-coins (list 200 100 50 20 10 5 1))
