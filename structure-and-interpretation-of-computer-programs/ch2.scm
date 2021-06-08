@@ -421,3 +421,15 @@
 (define us-coins (list 50 25 10 5 1))
 (define uk-coins (list 100 50 20 10 5 2 1 0.5))
 (define euro-coins (list 200 100 50 20 10 5 1))
+
+(define (same-parity x . y)
+  (if (odd? x)
+      (cons x (filter (lambda (e) (odd? e))  y))
+      (cons x (filter (lambda (e) (even? e)) y))))
+
+(define (ex2.19)
+  (display (same-parity 1 2 3 4 5 6 7))
+  (newline)
+  (display (same-parity 2 3 4 5 6 7 8))
+  (newline))
+
