@@ -460,3 +460,65 @@
      (display x)
      (newline))
    (list 1 2 3 4)))
+
+(define (ex2.25)
+  (display (car
+	    (cdr
+	     (car
+	      (cdr
+	       (cdr
+		'(1 3 (5 7) 9)))))))
+  (newline)
+  (display (car
+	    (car
+	     '((7)))))
+  (newline)
+  (display (car
+	    (cdr
+	     (car
+	      (cdr
+	       (car
+		(cdr
+		 (car
+		  (cdr
+		   (car
+		    (cdr
+		     (car
+		      (cdr
+		       '(1 (2 (3 (4 (5 (6 7)))))))))))))))))))
+  (newline))
+
+(define (deep-reverse lst)
+  (define (iter items result)
+    (cond ((null? items)
+	   result)
+
+	  ((atom? (car items))
+	   (iter (cdr items) (cons (car items) result)))
+
+	  (else
+	   (iter (cdr items)
+		 (cons (deep-reverse (car items)) result)))))
+  (iter lst '()))
+
+(define (ex2.27)
+  (display (deep-reverse '(1 (2 3) (4 5 (6 7 8)))))
+  (newline))
+
+(define (fringe tree)
+  (cond ((null? tree) '())
+	((atom? tree) (list tree))
+	(else
+	 (append (fringe (car tree)) (fringe (cdr tree))))))
+
+(define nightmarish
+  (list
+   (list
+    (list
+     (list 1 2 (list 3 (list 5 6) (list 7))))
+    (list 8 9 (list 10 (list (list 11 12))))
+    (list 13 (list 14) (list 15)))))
+
+(define (ex2.28)
+  (display (fringe nightmarish))
+  (newline))
