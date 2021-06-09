@@ -522,3 +522,54 @@
 (define (ex2.28)
   (display (fringe nightmarish))
   (newline))
+
+(define (make-mobile left right)
+  (list left right))
+
+(define (make-branch length structure)
+  (list length structure))
+
+(define (left-branch mobile)
+  (car mobile))
+
+(define (right-branch mobile)
+  (car (cdr mobile)))
+
+(define (branch-length branch)
+  (car branch))
+
+(define (branch-structure branch)
+  (car (cdr branch)))
+
+(define mobile
+  (make-mobile
+   (make-branch 2
+		(make-mobile (make-branch 2 2)
+			     (make-branch 2 2)))
+   (make-branch 2 (make-mobile (make-branch 2 2)
+			       (make-branch 2 2)))))
+
+(define (total-weight m)
+  (cond ((null? m) 0)
+	((not (pair? m)) m)
+	(else (+ (total-weight (branch-structure (left-branch m)))
+		 (total-weight (branch-structure (right-branch m)))))))
+
+(define (torque m)
+  (* (branch-length m) (total-weight (branch-structure m))))
+
+(define (balanced? m)
+  (cond ((not (pair? m)) #t)
+	(else
+	 (and (= (torque (left-branch m))
+		 (torque (right-branch m)))
+	      (balanced? (branch-structure (left-branch m)))
+	      (balanced? (branch-structure (right-branch m)))))))
+
+(define (ex2.29)
+  (display (total-weight mobile))
+  (newline)
+  (display (balanced? mobile))
+  (newline))
+
+
