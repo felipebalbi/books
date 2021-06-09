@@ -807,3 +807,15 @@
   (newline)
   (display (fold-left list '() (list 1 2 3)))
   (newline))
+
+(define (reverse-left sequence)
+  (fold-left (lambda (x y) (cons y x)) '() sequence))
+
+(define (reverse-right sequence)
+  (fold-right (lambda (x y) (append y (list x))) '() sequence))
+
+(define (ex2.39)
+  (display (reverse-left vector))
+  (newline)
+  (display (reverse-right vector))
+  (newline))
