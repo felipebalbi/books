@@ -572,4 +572,60 @@
   (display (balanced? mobile))
   (newline))
 
+(define tree (list 1 (list 2 (list 3 4) 5) (list 6 7)))
 
+(define (scale-tree tree factor)
+  (cond ((null? tree) '())
+	((not (pair? tree)) (* tree factor))
+	(else (cons (scale-tree (car tree) factor)
+		    (scale-tree (cdr tree) factor)))))
+
+(define (scale-tree tree factor)
+  (map (lambda (sub-tree)
+	 (if (pair? sub-tree)
+	     (scale-tree sub-tree factor)
+	     (* sub-tree factor)))
+       tree))
+
+(define (square-tree tree)
+  (map (lambda (sub-tree)
+	 (if (pair? sub-tree)
+	     (square-tree sub-tree)
+	     (* sub-tree sub-tree)))
+       tree))
+
+(define (square-tree-direct tree)
+  (cond ((null? tree) '())
+	((not (pair? tree)) (* tree tree))
+	(else (cons (square-tree-direct (car tree))
+		    (square-tree-direct (cdr tree))))))
+
+(define (ex2.30)
+  (display (square-tree tree))
+  (newline)
+  (display (square-tree-direct tree))
+  (newline))
+
+(define (tree-map proc tree)
+  (map (lambda (sub-tree)
+	 (if (pair? sub-tree)
+	     (tree-map proc sub-tree)
+	     (proc sub-tree)))
+       tree))
+
+(define (square-tree-map tree)
+  (tree-map square tree))
+
+(define (ex2.31)
+  (display (square-tree-map tree))
+  (newline))
+
+(define (subsets s)
+  (if (null? s)
+      (list '())
+      (let ((rest (subsets (cdr s))))
+	(append rest (map (lambda (x) (cons (car s) x)) rest)))))
+
+(define (ex2.32)
+  (display (subsets '(1 2 3 4)))
+  (newline))
