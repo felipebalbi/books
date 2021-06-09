@@ -493,7 +493,7 @@
     (cond ((null? items)
 	   result)
 
-	  ((atom? (car items))
+	  ((not (pair? (car items)))
 	   (iter (cdr items) (cons (car items) result)))
 
 	  (else
@@ -507,7 +507,7 @@
 
 (define (fringe tree)
   (cond ((null? tree) '())
-	((atom? tree) (list tree))
+	((not (pair? tree)) (list tree))
 	(else
 	 (append (fringe (car tree)) (fringe (cdr tree))))))
 
@@ -624,7 +624,10 @@
   (if (null? s)
       (list '())
       (let ((rest (subsets (cdr s))))
-	(append rest (map (lambda (x) (cons (car s) x)) rest)))))
+	(append rest
+		(map (lambda (x)
+		       (cons (car s) x))
+		     rest)))))
 
 (define (ex2.32)
   (display (subsets '(1 2 3 4)))
