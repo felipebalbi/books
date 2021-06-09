@@ -785,3 +785,25 @@
   (newline)
   (display (matrix-*-matrix matrix matrix))
   (newline))
+
+;;; If we want `fold-left' and `fold-right' to give the same
+;;; result, `op' must be commutative
+(define (fold-left op initial sequence)
+  (define (iter result rest)
+    (if (null? rest)
+	result
+	(iter (op result (car rest))
+	      (cdr rest))))
+  (iter initial sequence))
+
+(define fold-right accumulate)
+
+(define (ex2.38)
+  (display (fold-right / 1 (list 1 2 3)))
+  (newline)
+  (display (fold-left / 1 (list 1 2 3)))
+  (newline)
+  (display (fold-right list '() (list 1 2 3)))
+  (newline)
+  (display (fold-left list '() (list 1 2 3)))
+  (newline))
