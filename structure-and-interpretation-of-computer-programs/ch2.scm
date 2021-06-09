@@ -723,3 +723,29 @@
   (newline)
   (display (my-length (list 1 2 3)))
   (newline))
+
+(define (horner-eval x coefficient-sequence)
+  (accumulate (lambda (this-coef higher-terms)
+		(+ this-coef (* higher-terms x)))
+	      0
+	      coefficient-sequence))
+
+(define (accumulate op initial sequence))
+
+(define (count-leaves tree)
+  (accumulate
+   +
+   0
+   (map
+    (lambda (x)
+      (cond ((null? x) 0)
+	    ((not (pair? x)) 1)
+	    (else (count-leaves x)))) tree)))
+
+(define (ex2.35)
+  (display tree)
+  (newline)
+  (display (count-leaves tree))
+  (newline))
+
+
