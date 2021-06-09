@@ -730,8 +730,6 @@
 	      0
 	      coefficient-sequence))
 
-(define (accumulate op initial sequence))
-
 (define (count-leaves tree)
   (accumulate
    +
@@ -748,4 +746,42 @@
   (display (count-leaves tree))
   (newline))
 
+(define seq-of-seqs '((1 2 3) (4 5 6) (7 8 9) (10 11 12)))
 
+(define (accumulate-n op init seqs)
+  (if (null? (car seqs))
+      '()
+      (cons (accumulate op init (map car seqs))
+	    (accumulate-n op init (map cdr seqs)))))
+
+(define (ex2.36)
+  (display (accumulate-n + 0 seq-of-seqs))
+  (newline))
+
+(define (dot-product v w)
+  (accumulate + 0 (map * v w)))
+
+(define (matrix-*-vector m v)
+  (map (lambda (row) (dot-product row v)) m))
+
+(define (transpose mat)
+  (accumulate-n cons '() mat))
+
+(define (matrix-*-matrix m n)
+  (let ((cols (transpose n)))
+    (map (lambda (row col) (dot-product row col) cols) m n)))
+
+(define matrix
+  (list (list 1  2  3  4)
+	(list 5  6  7  8)
+	(list 9 10 11 12)))
+
+(define vector (list 1 2 3 4))
+
+(define (ex2.37)
+  (display (dot-product vector vector))
+  (newline)
+  (display (matrix-*-vector matrix vector))
+  (newline)
+  (display (matrix-*-matrix matrix matrix))
+  (newline))
