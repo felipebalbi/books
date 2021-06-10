@@ -1,3 +1,5 @@
+(define nil '())
+
 (define (make-rat n d)
   (let ((g (gcd n d))
 	(sign (if (< d 0) - +)))
@@ -818,4 +820,89 @@
   (display (reverse-left vector))
   (newline)
   (display (reverse-right vector))
+  (newline))
+
+(define (flatmap proc seq)
+  (accumulate append nil (map proc seq)))
+
+(define (expmod base exp m)
+  (cond ((= exp 0) 1)
+	((even? exp)
+	 (remainder (square (expmod base (/ exp 2) m))
+		    m))
+	(else
+	 (remainder (* base (expmod base (- exp 1) m))
+		    m))))
+
+(define (fermat-test n)
+  (define (try-it a)
+    (= (expmod a n n) a))
+  (try-it (+ 1 (random (- n 1)))))
+
+(define (fast-prime? n times)
+  (cond ((= times 0) #t)
+	((fermat-test n) (fast-prime? n (- times 1)))
+	(else #f)))
+
+(define (prime? n)
+  (fast-prime? n 100))
+
+(define (prime-sum? pair)
+  (prime? (+ (car pair) (cadr pair))))
+
+(define (make-pair-sum pair)
+  (list (car pair) (cadr pair) (+ (car pair) (cadr pair))))
+
+(define (prime-sum-pairs n)
+  (map make-pair-sum
+       (filter prime-sum?
+	       (flatmap
+		(lambda (i)
+		  (map (lambda (j) (list i j))
+		       (enumerate-interval 1 (- i 1))))
+		(enumerate-interval 1 n)))))
+
+(define (remove item sequence)
+  (filter (lambda (x) (not (= x item)))
+	  sequence))
+
+(define (permutations s)
+  (if (null? s)
+      (list nil)
+      (flatmap (lambda (x)
+		 (map (lambda (p) (cons x p))
+		      (permutations (remove x s))))
+	       s)))
+
+(define (unique-pairs n)
+  (flatmap
+   (lambda (i)
+     (map (lambda (j) (list i j))
+	  (enumerate-interval 1 (- i 1))))
+   (enumerate-interval 1 n)))
+
+(define (prime-sum-pairs-with-unique-pairs n)
+  (map make-pair-sum
+       (filter prime-sum?
+	       (unique-pairs n))))
+
+(define (ex2.40)
+  (display (prime-sum-pairs-with-unique-pairs 5))
+  (newline))
+
+(define (unique-triples n)
+  (flatmap
+   (lambda (i)
+     (flatmap (lambda (j)
+	    (map (lambda (k) (list i j k))
+		 (enumerate-interval 1 (- j 1))))
+	  (enumerate-interval 1 (- i 1))))
+   (enumerate-interval 1 n)))
+
+(define (unique-triples-up-to-sum n s)
+  (filter (lambda (triple) (<= (+ (car triple) (cadr triple) (caddr triple)) s))
+	  (unique-triples n)))
+
+(define (ex2.41)
+  (display (unique-triples-up-to-sum 5 8))
   (newline))
